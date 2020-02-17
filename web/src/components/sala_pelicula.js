@@ -82,8 +82,8 @@ class Sala_Pelicula extends Component {
     }
   };
 
-  deleteSala = value => {
-    Axios.delete(`${API_DELETE_SALA_PELI}?id=${value}`, {
+  deleteSalaPelicula = value => {
+    Axios.delete(`${API_DELETE_SALA_PELI}+${value}`, {
       data: { id: value }
     });
     alert("Eliminación exitosa");
@@ -227,7 +227,7 @@ class Sala_Pelicula extends Component {
                         <p className="p-3 px-5" key={element.id}>
                           <button
                             // onClick={() => this.deleteSala(element.id)}
-                            className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded-full focus:outline-none focus:shadow-outline"
+                            className="hidden text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded-full focus:outline-none focus:shadow-outline"
                           >
                             Editar
                           </button>
@@ -238,7 +238,7 @@ class Sala_Pelicula extends Component {
                       {salas_peliculas.map(element => (
                         <p className="text-left p-3 px-5" key={element.id}>
                           <button
-                            onClick={() => this.deleteSala(element.id)}
+                            onClick={() => this.deleteSalaPelicula(element.id)}
                             className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-4 rounded-full focus:outline-none focus:shadow-outline"
                           >
                             Eliminar

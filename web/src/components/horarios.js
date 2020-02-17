@@ -4,6 +4,7 @@ import Header from "./header";
 
 const API_ADD_HORARIOS = "http://localhost:4000/createHorario";
 const API_GET_HORARIOS = "http://localhost:4000/getHorario";
+const API_DELETE_HORARIOS = "http://localhost:4000/deleteHorario/";
 
 class Horarios extends Component {
   constructor(props) {
@@ -49,6 +50,14 @@ class Horarios extends Component {
         console.log(error);
       });
   }
+
+  deleteHorario = value => {
+    Axios.delete(`${API_DELETE_HORARIOS}` + value, {
+      data: { id: value }
+    });
+    alert("eliminado");
+    window.location.assign("http://localhost:3000/horarios");
+  };
 
   render() {
     const { horarios, fecha, hora } = this.state;
@@ -140,8 +149,8 @@ class Horarios extends Component {
                         {horarios.map(element => (
                           <p className="p-3 px-5" key={element.id}>
                             <button
-                              // onClick={() => this.deleteSala(element.id)}
-                              className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded-full focus:outline-none focus:shadow-outline"
+                              // onClick={() => this.updateHorario(element.id)}
+                              className="hidden text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded-full focus:outline-none focus:shadow-outline"
                             >
                               Editar
                             </button>
@@ -152,7 +161,7 @@ class Horarios extends Component {
                         {horarios.map(element => (
                           <p className="p-3 px-5" key={element.id}>
                             <button
-                              // onClick={() => this.deleteSala(element.id)}
+                              onClick={() => this.deleteHorario(element.id)}
                               className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-4 rounded-full focus:outline-none focus:shadow-outline"
                             >
                               Eliminar

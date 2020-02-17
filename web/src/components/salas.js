@@ -53,7 +53,7 @@ class Salas extends Component {
   }
 
   deleteSala = value => {
-    Axios.delete(`${API_URL_DELETE_SALA}/id` + value, {
+    Axios.delete(`${API_URL_DELETE_SALA}/` + value, {
       data: { id: value }
     });
     alert("eliminado");
@@ -152,7 +152,7 @@ class Salas extends Component {
                           <p className="p-3 px-5" key={element.id}>
                             <button
                               // onClick={() => this.deleteSala(element.id)}
-                              className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded-full focus:outline-none focus:shadow-outline"
+                              className="hidden text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded-full focus:outline-none focus:shadow-outline"
                             >
                               Editar
                             </button>

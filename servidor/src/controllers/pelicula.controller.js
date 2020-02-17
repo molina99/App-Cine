@@ -69,13 +69,7 @@ async function updatePelicula(req, res) {
   const { id } = req.params;
   const { titulo, resumen, categoria, valor_entrada } = req.body;
   const peliculas = await Peliculas.Peliculas.findAll({
-    attributes: [
-      "id",
-      "titulo",
-      "resumen",
-      "categoria",
-      "valor_entrada"
-    ],
+    attributes: ["id", "titulo", "resumen", "categoria", "valor_entrada"],
     where: {
       id
     }

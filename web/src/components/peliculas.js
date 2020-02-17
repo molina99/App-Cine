@@ -4,6 +4,7 @@ import Header from "./header";
 
 const API_ADD_PELIS = "http://localhost:4000/createPelicula";
 const API_GET_PELIS = "http://localhost:4000/getPelicula";
+const API_DELETE_PELIS = "http://localhost:4000/deletePelicula/";
 
 class Peliculas extends Component {
   constructor(props) {
@@ -25,16 +26,14 @@ class Peliculas extends Component {
       titulo: this.state.titulo,
       resumen: this.state.resumen,
       categoria: this.state.categoria,
-      valor_entrada: this.state.valor_entrada,
-      estado: this.state.estado
+      valor_entrada: this.state.valor_entrada
     };
 
     if (
       this.post.titulo === "" ||
       this.post.resumen === "" ||
       this.post.categoria === "" ||
-      this.post.valor_entrada === "" ||
-      this.post.estado === ""
+      this.post.valor_entrada === ""
     ) {
       alert("Obligatorio completar todos los campos");
     } else {
@@ -58,6 +57,14 @@ class Peliculas extends Component {
         console.log(error);
       });
   }
+
+  deletePelicula = value => {
+    Axios.delete(`${API_DELETE_PELIS}` + value, {
+      data: { id: value }
+    });
+    alert("eliminado");
+    window.location.assign("http://localhost:3000/peliculas");
+  };
 
   render() {
     const { pelis, titulo, resumen, categoria, valor_entrada } = this.state;
@@ -196,12 +203,12 @@ class Peliculas extends Component {
                   <div className="flex justify-between mt-5">
                     <button
                       // onClick={() => this.deleteSala(element.id)}
-                      className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded-full focus:outline-none focus:shadow-outline"
+                      className="hidden text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded-full focus:outline-none focus:shadow-outline"
                     >
                       Editar
                     </button>
                     <button
-                      // onClick={() => this.deleteSala(element.id)}
+                      onClick={() => this.deletePelicula(element.id)}
                       className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded-full focus:outline-none focus:shadow-outline"
                     >
                       Eliminar

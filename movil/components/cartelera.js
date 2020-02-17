@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link, AsyncStorage } from "react-router-native";
+import { Link } from "react-router-native";
 import Axios from "axios";
 import {
+  AsyncStorage,
   StyleSheet,
   Text,
   View,
@@ -30,13 +31,14 @@ export default class Cartelera extends Component {
       });
   }
 
-  asyncstorageSave = async id_pelicula => {
-    try {
-      await AsyncStorage.setItem("id", id_pelicula.toString());
-    } catch (err) {
-      alert(err);
-    }
-  };
+  // asyncstorageSave = async id_pelicula => {
+  //   try {
+  //     await AsyncStorage.setItem("id_pelicula", id_pelicula.toString());
+  //     alert(id_pelicula);
+  //   } catch (err) {
+  //     alert(err);
+  //   }
+  // };
 
   render() {
     const { peliculas } = this.state;
@@ -46,7 +48,7 @@ export default class Cartelera extends Component {
         source={require("../assets/bg.jpg")}
       >
         <View>
-          <View style={styles.header}>
+          <View>
             <Text style={styles.cartelera}>CARTELERA</Text>
           </View>
           <ScrollView>
@@ -54,7 +56,7 @@ export default class Cartelera extends Component {
               <Link
                 to="/detalleMovie"
                 key={element.id}
-                onPress={() => this.asyncstorageSave(element.id)}
+                // onPress={() => this.asyncstorageSave(element.id)}
               >
                 <View style={styles.menuContainer}>
                   <View key={element.id} style={styles.menuItem}>
@@ -96,14 +98,14 @@ const styles = StyleSheet.create({
     borderWidth: 2
   },
   menuContainer: {
-    marginBottom: 100
+    marginBottom: 50
   },
   text: {
     color: "#fff"
   },
   menuItem: {
     paddingHorizontal: 50,
-    marginBottom: 50
+    marginBottom: 100
   },
   title_movies: {
     color: "#fff",
